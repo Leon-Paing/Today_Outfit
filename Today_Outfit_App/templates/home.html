@@ -1,0 +1,334 @@
+<html>
+  <head>
+    <title>Today's Outfit.com</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{%static 'favicon.ico'%}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Sanchez"
+      rel="stylesheet"
+    />
+    <link
+      href="https://db.onlinewebfonts.com/c/5da49843f66caf14799662bd12aa55a2?family=Dream+Avenue"
+      rel="stylesheet"
+    />
+    <link
+      href="https://db.onlinewebfonts.com/c/5da49843f66caf14799662bd12aa55a2?family=Dream+Avenue"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Anonymous+Pro"
+    />
+    <link rel="stylesheet" href="{%static 'home.css'%}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <section id="nav">
+      <div id="explore" class="nav_items">
+        <h3><a href="/explore">Explore</a></h3>
+      </div>
+      <div id="home" class="nav_items">
+        <h2><a href="/home">Today's Outfit</a></h2>
+      </div>
+      <div id="profile" class="nav_items">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          fill="currentColor"
+          class="bi bi-person-circle"
+          viewBox="0 0 16 16"
+        >
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+          <path
+            fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+          />
+        </svg>
+        <div id="absolute_div">
+          <form class="profile-details-container" method="POST">
+            {% csrf_token %}
+            <span id="x-container">╳</span>
+            <div id="profile-image-container">
+              <img
+                id="profile-image"
+                src="/static/userprofile.png"
+                alt="profile-image"
+              />
+            </div>
+            <div id="details-container">
+              <div id="username-container">
+                <div id="username">{{username}}</div>
+              </div>
+              <div id="email-container">
+                <div id="email-icon">@</div>
+                <div id="email">{{email}}</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section id="main">
+      <div id="div_outfit">
+        <p><b id="generated_message"></b></p>
+        <div id="outfit_form">
+          <div id="outfit_detail">
+            <div id="image">
+              <img id="result_image" src="" />
+            </div>
+            <div id="type_of_image" class="descs">
+              <b id="type_image"></b>
+            </div>
+            <div id="description" class="descs">
+              <b id="desc"></b>
+            </div>
+            <div id="itemIDDD">
+              <b id="itemID"></b>
+            </div>
+          </div>
+          <div id="feedback">
+            <button type="submit" class="btn_emoji heart-button" id="heart">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                fill="currentColor"
+                class="bi bi-heart-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
+                />
+              </svg>
+              <div class="likes-count" id="likes"></div>
+            </button>
+            <div class="btn_emoji" id="sad">☹️</div>
+          </div>
+        </div>
+      </div>
+      <div id="div_selection">
+        <p><b>Choose your preferred category!</b></p>
+        <form id="category_form" method="post">
+          {% csrf_token %}
+          <select id="option1" class="selection" name="option1" required>
+            <option class="opt_category">casual</option>
+            <option class="opt_category">classic</option>
+            <option class="opt_category">MyanmarTraditional</option>
+          </select>
+          <select id="option3" class="selection" name="option3" required>
+            <option class="opt_category">male</option>
+            <option class="opt_category">female</option>
+          </select>
+          <select id="option2" class="selection" name="option2" required>
+            <option class="opt_category">shirt</option>
+            <option class="opt_category">pant</option>
+          </select>
+          <button type="submit" id="btn_generate">Generate</button>
+        </form>
+      </div>
+    </section>
+    <audio id="click-sound" src="{% static 'sound2.mp3'%}"></audio>
+    <audio id="click-sound2" src="{% static 'sound.mp3'%}"></audio>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const profile = document.getElementById("profile");
+        const profile_container = document.getElementById("absolute_div");
+
+        function profileDisplay() {
+          profile_container.style.display = "flex";
+        }
+
+        profile.addEventListener("click", profileDisplay);
+
+        const x = document.getElementById("x-container");
+
+        x.addEventListener("click", function profileClose(event) {
+          event.stopPropagation();
+          profile_container.style.display = "none";
+        });
+
+        const sound = document.getElementById("click-sound");
+        sound.play();
+
+        const option1 = document.getElementById("option1");
+        const option2 = document.getElementById("option2");
+        const option3 = document.getElementById("option3");
+
+        const optionsData = {
+          casual: {
+            male: ["shirt", "pant"],
+            female: ["blouse", "lowerwear"],
+          },
+          classic: {
+            male: ["SuitCoat", "SuitPant"],
+            female: ["SuitCoat", "SuitPant"],
+          },
+          MyanmarTraditional: {
+            male: ["OutfitSet"],
+            female: ["OutfitSet"],
+          },
+        };
+
+        updateMiddleOptions();
+        option1.addEventListener("change", updateMiddleOptions);
+        option3.addEventListener("change", updateMiddleOptions);
+
+        function updateMiddleOptions() {
+          const selectedOption1 = option1.value;
+          const selectedOption3 = option3.value;
+          clearOptions(option2);
+
+          if (
+            optionsData[selectedOption1] &&
+            optionsData[selectedOption1][selectedOption3]
+          ) {
+            optionsData[selectedOption1][selectedOption3].forEach(function (
+              option
+            ) {
+              const newOption = document.createElement("option");
+              newOption.value = option;
+              newOption.textContent = option;
+              option2.appendChild(newOption);
+            });
+          }
+        }
+
+        function clearOptions(selectElement) {
+          selectElement.innerHTML = "";
+        }
+
+        document
+          .getElementById("category_form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+            var csrfToken = formData.get("csrfmiddlewaretoken");
+
+            fetch("", {
+              method: "POST",
+              body: formData,
+              headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRFToken": csrfToken,
+              },
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Network response was not ok");
+                }
+                return response.json();
+              })
+              .then((data) => {
+                var resultDiv = document.getElementById("div_outfit");
+                var resultType = document.getElementById("type_image");
+                var resultDesc = document.getElementById("desc");
+                var resultImage = document.getElementById("result_image");
+                var resultLikesCount = document.getElementById("likes");
+                var resultID = document.getElementById("itemID");
+                var generatedMessage =
+                  document.getElementById("generated_message");
+
+                if (
+                  resultDiv &&
+                  resultType &&
+                  resultDesc &&
+                  resultImage &&
+                  resultLikesCount &&
+                  resultID &&
+                  generatedMessage
+                ) {
+                  if (data.error) {
+                    resultType.textContent = data.error;
+                    resultDesc.textContent = data.error;
+                    resultLikesCount.textContent = data.error;
+                    resultID.textContent = data.error;
+                    resultImage.style.display = "none";
+                  } else {
+                    generatedMessage.textContent = data.generated_message;
+                    resultType.textContent = `${data.item_type}`;
+                    resultDesc.textContent = `${data.description}`;
+                    resultLikesCount.textContent = `${data.likes_count}`;
+                    resultID.textContent = `${data.item_id}`;
+                    resultImage.src = `{% static '' %}` + data.photo_path;
+                    resultImage.style.display = "block";
+
+                    fetch("{% url 'store_session' %}", {
+                      method: "POST",
+                      body: JSON.stringify({ resultDesc: data.description }),
+                      headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrfToken,
+                      },
+                    })
+                      .then((response) => {
+                        if (!response.ok) {
+                          throw new Error("Failed to store session data");
+                        }
+                        return response.json();
+                      })
+                      .then((result) => {
+                        console.log("Result stored in session:", result);
+                      })
+                      .catch((error) => {
+                        console.error("Error storing session data:", error);
+                      });
+                  }
+                  resultDiv.style.display = "flex";
+                } else {
+                  console.error("One or more elements not found in the DOM");
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+              });
+          });
+
+        const sessionResultDesc = "{{ request.session.resultDesc }}";
+        if (sessionResultDesc) {
+          console.log("Session resultDesc found:", sessionResultDesc);
+        }
+
+        document
+          .getElementById("heart")
+          .addEventListener("click", function (event) {
+            event.preventDefault();
+            const sound = document.getElementById("click-sound2");
+            sound.play();
+
+            const itemId = document.getElementById("itemID").innerText;
+            fetch(`/like_item/${itemId}/`, {
+              method: "POST",
+              headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "X-Requested-With": "XMLHttpRequest",
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.likes_count !== undefined) {
+                  document.getElementById("likes").textContent =
+                    data.likes_count;
+                } else {
+                  console.error("Error:", data.error);
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          });
+      });
+    </script>
+  </body>
+</html>

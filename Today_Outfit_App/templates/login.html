@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login - Today's Outfit</title>
+        <link rel="icon" type="image/x-icon" href="{%static 'favicon.ico'%}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet'>
+        <link href="https://db.onlinewebfonts.com/c/5da49843f66caf14799662bd12aa55a2?family=Dream+Avenue" rel="stylesheet">
+        <link rel="stylesheet" href="{%static 'login.css'%}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+    <body>
+        <section id="sec">
+            <h3 id="header">
+                Today's Outfit
+            </h3>
+            <div id="divForm">
+                <h2 id="label1">
+                    Log-in
+                </h2>
+                <form action="{%url 'logIn'%}" method="POST">
+                    {% csrf_token %}
+                    <div id="form">
+                        <div id="usernamepassowrdDiv">
+                            <label for="username" class="lbl">Username&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                              </svg></label>
+                            <input placeholder="Enter your username" name="username" class="input" required>
+                            <label for="password" class="lbl">Password&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                                <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                              </svg></label>
+                            <input type="password" name="password" class="input" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" id="btn"> > </button>
+                        <a href="/signup" id="gotoSignin">Don't have an account?</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+  <head>
+    <title>Error 404</title>
+  </head>
+  <body
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-itens: center;
+      text-align: center;
+      color: red;
+      background-color: black;
+    "
+  >
+    <section
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-itens: center;
+        text-align: center;
+        margin-top: 20%;
+        font-family: Courier New, monospace;
+        font-size: 1.5rem;
+      "
+    >
+      <h1>ERROR 404</h1>
+      <h1>Bad Request!</h1>
+    </section>
+    <audio
+      id="click-sound"
+      src="{% static 'error.mp3'%}"
+      style="display: none"
+    ></audio>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sound = document.getElementById("click-sound");
+      sound.play();
+    });
+  </script>
+</html>

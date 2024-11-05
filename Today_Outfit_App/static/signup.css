@@ -1,0 +1,245 @@
+body{
+    margin: 0;
+    background-image: url('loginbg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+#sec{
+    margin-top: 10px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+#header{
+    font-family: Snell Roundhand, cursive;
+    font-size: 3em;
+    font-weight: 1200;
+    border: none;
+    color: rgb(29, 25, 25);
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 2s linear;
+}
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+form{
+   
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#usernamepassowrdDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    margin-left: -10%;
+    position: relative;
+}
+.lbl{
+    font-family: 'Sanchez';
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #61483b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input{
+    width: 260px;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 0 0 0 5px;
+    font-size:large;
+    font-family: inherit;
+    border: none;
+    box-sizing: border-box;
+    box-shadow: 5px 5px 30px black !important;
+
+}
+#btn{
+    font-size: xx-large;
+    color: #61483b;
+    background-color: transparent;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    outline: none;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#btn:hover{
+    background-color: #61483b;
+    color: white;
+    border: 2px solid #61483b;
+}
+#gotoSignin{
+    margin-bottom: 20px;
+    font-family: 'Sanchez';
+    color: #61483b;
+}
+#form{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+#divForm{
+    display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.5); 
+  padding: 10px 30px 5px 30px;
+  width: 25%;
+  border: none;
+  box-shadow: 5px 5px 20px rgb(0, 0, 0);
+  border-top-right-radius: 20%;
+  border-bottom-left-radius: 20%;
+  position: relative;
+  animation: bounce-in-top 1s linear;
+}
+@-webkit-keyframes bounce-in-top {
+  0% {
+    -webkit-transform: translateY(-500px);
+            transform: translateY(-500px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateY(-65px);
+            transform: translateY(-65px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateY(-28px);
+            transform: translateY(-28px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+#label1{
+    font-family: 'Sanchez';
+    font-size: xx-large;
+    color: #61483b;
+}
+
+@media only screen and (min-width: 340px) and (max-width: 768px){
+  body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+ #sec{
+  margin-top: 10%;
+ }
+ #header{
+  font-size: 2em;
+ }
+ #divForm{
+  width: 80%;
+ }
+ #usernamepassowrdDiv{
+    margin-left: 0;
+ }
+}
+
+@media only screen and (min-width: 340px) and (max-width: 768px){
+  body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+ #sec{
+  margin-top: 10%;
+ }
+ #header{
+  font-size: 2em;
+ }
+ #divForm{
+  width: 80%;
+ }
+ #usernamepassowrdDiv{
+    margin-left: 0;
+ }
+ .lbl{
+  font-size: 22px;
+ }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1100px){
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+     #sec{
+      margin-top: 20%;
+     }
+     #header{
+      font-size: 3em;
+     }
+     #divForm{
+      width: 90%;
+     }
+     #usernamepassowrdDiv{
+        margin-left: 0;
+     }
+}
