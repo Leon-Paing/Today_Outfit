@@ -9,5 +9,5 @@ Outfit Recommendation website
 
 ### Recommended items
 <p>
-  <img src="">
+  <img src="./125561AF-56BB-422D-AA82-E631C7A94778_1_105_c.jpeg">
 </p>
