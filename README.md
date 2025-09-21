@@ -13,7 +13,7 @@ Outfit Recommendation website
 </p>
 
 ## In systems
-### - Data Visualization
+### - Recommendation model results
 <p>
   <img src="./E62389B2-9A31-4789-845B-FFB0EDA720CB_1_201_a.jpeg">
 </p>
