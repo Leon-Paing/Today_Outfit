@@ -1,5 +1,7 @@
 # Today_Outfit
-Outfit Recommendation website
+<p>
+  Today Outfit is an AI based fashion recommendation website strongly based on NLP(Natural Language Processing) along with DataScience principles.
+</p>
 
 
 ### Home Page
